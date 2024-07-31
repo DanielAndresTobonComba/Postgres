@@ -121,6 +121,10 @@ direccion direccion_completa
 -- Eliminar los registros de una tabla 
 TRUNCATE TABLE cars;
 
+--- Especificar desde donde empezar a hablar
+SELECT * FROM customers
+LIMIT 20 OFFSET 40;
+
 -- Eliminar una tabla
 drop table "nombreTabla";
 ~~~
