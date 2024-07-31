@@ -8,7 +8,10 @@ Create database "nombre_db".
 \D describir una tabla.
 
 ## Tablas y tipos de datos 
+
+
 -- CREAR UN DATO DE TIPO ENUM
+~~~ psql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
 CREATE TYPE estadocivil AS ENUM ('Casado(a)', 'Soltero(a)', 'Viudo(a)','Con
 pelo(a)');
@@ -20,13 +23,15 @@ current_mood mood
 
 INSERT INTO person VALUES ('Moe', 'happy');
 SELECT * FROM person WHERE current_mood = 'happy';
+~~~
 
 -- TIPOS DE CONSTRIANS 
+~~~ sql
 CHECK: Asegura que los valores en una columna cumplen una condición especificada.
 edad integer NOT NULL CHECK (edad > 0);
-
-
+~~~
 ## AÑADIR CONSTRAINS A UNA TABLA
+~~~ sql
 ALTER TABLE empleados ADD PRIMARY KEY (id);
 
 ALTER TABLE empleados ADD CONSTRAINT fk_departamento
@@ -40,8 +45,12 @@ ALTER TABLE empleados ALTER COLUMN nombre SET NOT NULL;
 ALTER TABLE empleados ADD CONSTRAINT check_edad CHECK (edad > 0);
 
 ALTER TABLE empleados ALTER COLUMN salario SET DEFAULT 0.00;
+~~~
+
+
 
 ## Ejemplo importante
+~~~ sql
 
 CREATE TABLE ejemplo (
 id serial PRIMARY KEY, -- serial: Entero con auto-incremento
@@ -73,9 +82,11 @@ rangos int4range, -- range: Rango de valores
 colores_preferidos varchar(20)[] -- array: Arreglo de cadenas
 );
 
+~~~
+
 
 ## ENUM Y TYPE 
-
+~~~ sql
 -- Ejemplo de tipo ENUM
 CREATE TYPE estadocivil AS ENUM ('Casado(a)', 'Soltero(a)', 'Viudo(a)','Con
 pelo(a)');
@@ -100,4 +111,9 @@ nombre varchar(50),
 ecivil estadocivil,
 direccion direccion_completa 
 );
+~~~
+
+
+
+
 
