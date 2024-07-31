@@ -115,5 +115,13 @@ direccion direccion_completa
 
 
 
+## Manejo de tablas 
 
+~~~ sql
+-- Eliminar los registros de una tabla 
+TRUNCATE TABLE cars;
+
+-- Eliminar una tabla
+drop table "nombreTabla";
+~~~
 
