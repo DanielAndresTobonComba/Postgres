@@ -7,6 +7,8 @@ Create database "nombre_db".
 
 \D describir una tabla.
 
+\df listar procedimeintos o funciones.
+
 ## Tablas y tipos de datos 
 
 
@@ -128,4 +130,50 @@ LIMIT 20 OFFSET 40;
 -- Eliminar una tabla
 drop table "nombreTabla";
 ~~~
+
+## Crear un procedimeintos
+~~~ sql
+CREATE FUNCTION sumar(n1 INTEGER, n2 INTEGER)
+RETURNS INTEGER AS $$
+BEGIN
+RETURN n1 + n2;
+END;
+$$ LANGUAGE plpgsql;
+~~~
+
+## LLAMARL0 
+~~~ sql
+SELECT sumar(10, 20);
+~~~
+
+## Manejo de errores 
+
+~~~ sql
+-- El procedimiento solo funciona si el  raise notice tiene el %.
+
+CREATE FUNCTION insertar_empleado(nombre VARCHAR, edad INTEGER, salario NUMERIC)
+RETURNS VOID AS $$
+BEGIN
+INSERT INTO empleados (nombre, edad, salario) VALUES (nombre, edad, salario);
+EXCEPTION
+WHEN OTHERS THEN
+RAISE NOTICE 'Error al insertar los datos: %', SQLERRM;
+END;
+$$ LANGUAGE plpgsql;
+
+SELECT insertar_empleado('Juan Perez', 30, 3000.00);
+~~~
+
+## Obtener query o resultados de una tabla
+~~~ sql
+CREATE FUNCTION obtener_todos_los_empleados()
+RETURNS TABLE(id INTEGER, nombre VARCHAR, edad INTEGER, salario NUMERIC) AS $$
+BEGIN
+RETURN QUERY SELECT id, nombre, edad, salario FROM empleado;
+END;
+$$ LANGUAGE plpgsql;
+~~~
+
+
+
 
